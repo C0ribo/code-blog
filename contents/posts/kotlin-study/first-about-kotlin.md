@@ -289,3 +289,8 @@ squares.copyOf(5) // 1, 4, 9, 16, 0 (부족한 부분에 0이 채움)
 var a = arrayOf(1, 4, 9, 16)
 a = arrayOf("one", "two") // Error: Array<String> -> Array<Int>
 ```
+
+## 참고
+
+- 코틀린 완변 가이드
+- 코틀린 공식 레퍼런스
