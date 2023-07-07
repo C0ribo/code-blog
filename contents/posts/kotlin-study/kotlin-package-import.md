@@ -13,7 +13,7 @@ series: "코틀린 공부 기록"
 
 ### 패키지(package)
 
-![package import(Do it! 코틀린 프로그래밍 자료)](https://github.com/C0ribo/code-blog/issues/1#issue-1792906771)
+![import and package](https://github.com/C0ribo/code-blog/assets/133131980/5d3cf0c0-7457-4cf5-8443-136a09d91d1f)
 
 패키지는 모듈 아래의 개념으로 자바처럼 소스파일의 첫 줄에 한다. 
 패키지는 지정하지 않으면 해당 파일의 콘텐츠는 이름이 없는 기본 패키지에 해당 한다.
