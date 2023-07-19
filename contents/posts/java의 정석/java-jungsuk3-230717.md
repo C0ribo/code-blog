@@ -266,3 +266,16 @@ num2 = num3;
 8 * 2 = 16  9 * 2 = 18
 8 * 3 = 24  9 * 3 = 27
 ```
+```java
+public static void main(String[] args){
+        int result = 0;
+        for(int i = 2; i<10; i++){
+            for(int j = 1; j < 4; j++){
+                result = i * j;
+                System.out.printf("%d * %d = %d\n", i , j, result);
+            }
+            System.out.println();
+        }
+    }
+```
+> 아직 세로로만 나열 되어 나타낸다.
