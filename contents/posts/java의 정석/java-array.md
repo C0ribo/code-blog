@@ -72,3 +72,77 @@ score[0] = 50; // 각 빈 공간에 값 초기화
 score[1] = 20;
 score[2] = 40; 
 ```
+
+배열을 생성과 초기화를 한번에 진행할 수도 있다.
+```java
+int[] score = new int[] { 50, 20, 40 };
+```
+저 괄호 {} 안에 아무것도 넣지 않으면 길이가 0인 배열이 생성된다. 
+
+#### 배열의 출력
+
+배열을 출력할 때 변수를 출력하듯이 **System.out.println** 으로 출력하면 이상한 값이 나오게 된다.
+```java
+int[] iArr = { 100, 95, 80, 70, 60 };
+System.out.println(iArr); // [I@14318bb 
+```
+
+타입@주소의 형식으로 출력이 되는데 '[I'는 1차원 int 배열이고 @뒤에는 배열의 주소를 16진수로 나타낸다.
+이러한 방법을 해결하기 위해서는 `Arrays.toString(배열이름)`를 사용하여 배열을 문자열 형식으로 만들어 출력한다.
+```java
+int[] iArr = { 100, 95, 80, 70, 60 };
+System.out.println(Arrays.toString(iArr));
+```
+
+다만 `Arrays.toString()`을 사용하려면 `import java.util.*`를 추가해야 한다.
+
+#### 배열의 복사 
+
+배열은 한번 생성하면 길이를 변경할 수 없기에 더 많은 저장공간이 필요하다면 
+1. 더 큰 배열을 생성한다.
+2. 기존 배열의 내용을 새로운 배열에 복사한다.   
+
+라는 방법이 있다. 
+
+그 중에서 배열을 복사하는 방법을 알아볼텐데 방법은 두가지가 있다.
+- for문을 이용해서 배열을 복사
+- `System.arraycopy()` 메서드나 `Arrays.copyOf()` 메서드 사용
+
+##### for문을 이용해서 배열 복사 
+```java
+int[] arr = new int[5];
+int[] tmp = new int[arr.length*2];
+
+for(int i=0; i< arr.length; i++)
+  tmp[i] = arr[i];
+  arr = tmp; 
+```
+다만 이러한 작업들은 비용이 많이 들기 떄문에 처음부터 배열 길이를 넉넉하게 잡는게 낫다.
+
+##### System.arraycopy() 메서드와 Arrays.copyOf() 메서드
+
+- System클래스의 `arraycopy()`를 사용하면 간편하고 빠르게 배열을 복사할 수 있다. 또한 지정된 범위의 값을 한번에 복사한다.
+- `Arrays.copyOf()`는 `System.copyOf()`를 래핑한 함수로 둘이 동일하다. `Arrays.copyOf()`가 좀 더 직관적이다.
+
+```java
+System.arraycopy(복사할 배열, 복사를 시작할 배열의 위치, 붙여넣을 배열, 복사된 배열값들이 붙여질 시작위치, 지정된 길이만큼 값들이 복사)
+System.arraycopy(num , 0, newNum, 0, num.length);
+```
+
+- Arrays.copyOf()
+```java
+Arrays.copyOf(원본 배열, 복사할 길이)
+arr2 = Arrays.copyOf(arr1, arr1.length);
+```
+
+- Arrays.copyOfRange()
+```java
+Arrays.copyOfRange(원본 배열, 복사 시작 인덱스, 복사하려는 마지막 요소의 인덱스 바로 다음 인덱스);
+arr2 = Arrays.copyOfRange(arr1, 1, 3); 
+```
+
+
+### 참조
+
+- 자바의 정석
+- [자바의 배열](https://inpa.tistory.com/entry/JAVA-%E2%98%95-%EC%9E%90%EB%B0%94-%EB%B0%B0%EC%97%B4Array-%EB%AC%B8%EB%B2%95-%EC%9D%91%EC%9A%A9-%EC%B4%9D%EC%A0%95%EB%A6%AC)
