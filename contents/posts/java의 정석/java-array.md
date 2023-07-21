@@ -1,15 +1,15 @@
 ---
-title: "🧐 배열(Array)"
+title: "🧐 1차원 배열(Array)"
 description: "배열 선언, 초기화, 출력, 복사"
 date: 2023-07-20
 update: 2023-07-20
 tags:
-  - Java
+  - java
   - study
 series: "Java 공부 기록지"
 ---
 
-> 책에 부족한 내용이 많아서 혼자 보기 위해 기록해서 남긴 글 
+> 책에 부족한 내용이 많아서 혼자 보기 위해 기록해서 남긴 글
 
 ### 배열이란
 
