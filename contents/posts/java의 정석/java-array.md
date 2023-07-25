@@ -6,7 +6,7 @@ update: 2023-07-20
 tags:
   - java
   - study
-series: "Java 공부 기록지"
+series: "Java 기초"
 ---
 
 > 책에 부족한 내용이 많아서 혼자 보기 위해 기록해서 남긴 글

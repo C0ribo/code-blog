@@ -6,7 +6,7 @@ update: 2023-07-22
 tags:
   - java
   - study
-series: "Java 공부 기록지"
+series: "Java 기초"
 ---
 
 ## 선언위치에 따른 변수의 종류

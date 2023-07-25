@@ -6,7 +6,7 @@ update: 2023-07-21
 tags:
   - java
   - study
-series: "Java 공부 기록지"
+series: "Java 기초"
 ---
 
 ## 다차원 배열

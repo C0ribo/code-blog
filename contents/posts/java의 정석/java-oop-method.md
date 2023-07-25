@@ -6,7 +6,7 @@ update: 2023-07-24
 tags:
   - java
   - study
-series: "Java 공부 기록지"
+series: "Java 기초"
 ---
 
 ## 메서드

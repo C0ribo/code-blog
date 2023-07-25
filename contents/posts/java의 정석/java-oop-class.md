@@ -6,7 +6,7 @@ update: 2023-07-21
 tags:
   - java
   - study
-series: "Java 공부 기록지"
+series: "Java 기초"
 ---
 
 ## 객체지향 프로그래밍
