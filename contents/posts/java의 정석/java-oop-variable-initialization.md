@@ -2,7 +2,7 @@
 title: "[Java] 변수의 초기화"
 description: "변수의 초기화, 명시적 초기화, 초기화 블럭"
 date: 2023-07-26
-update: 2023-07-26
+update: 2023-07-27
 tags:
   - java
   - study
