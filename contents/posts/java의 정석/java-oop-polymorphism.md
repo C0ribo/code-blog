@@ -113,3 +113,67 @@ fe2 = (FireEngine)car; // 형변환 생략 불가. 다운 캐스팅
 형변환은 참조변수의 타입을 변환하는 것이지 인스턴스를 변환하는 것이 아니기에 참조변수의 형변환은 인스턴스에 아무런 영향을 미치지 않는다. 참조변수의 형변환은 인스턴스에서 사용할 수 있는 멤버의 범위 개수를 조절하는 것이다. 
 
 > 서로 상속관계에 있는 타입간의 형변환은 양방향으로 자유롭게 수행될 수 있으나, 참조변수가 가리키는 인스턴스의 자손타입으로 형변환은 허용되지 않는다.<br>그래서 참조변수가 가리키는 인스턴스의 타입이 무엇인지 확인하는 것이 중요하다.
+
+## instanceof연산자
+
+instanceof연산자는 객체에 대한 클래스(참조형) 타입에만 사용할 수 있으며 참조변수가 참조하고 있는 인스턴스의 실제 타입을 알아보기 위해 쓰인다.
+
+주로 조건문에 쓰이며, 참조변수 instanceof 타입(클래스명) 순으로 사용한다.
+그리고 연산의 결과로 ture/false 중 하나로 반환한다.
+
+```java
+void doWork(Car c){
+  if(c instanceof FireEngine){ // 참조변수 + instanceof + 타입(클래스명)
+    FireEngine fe = (FireEngine)c;
+    fe.water();
+    ...
+  }
+  else if(c instanceof Ambulance){
+    Ambulance a = (Ambulance)c;
+    a.siren();
+    ...
+  }
+}
+```
+
+instanceof연산자를 이용해서 참조변수 c가 가리키고 있는 인스턴스 타입을 체크하고, 적절히 형변환한 다음에 작업을 해야 한다.
+
+부모타입의 참조변수로는 실제 인스턴스 멤버들을 모두 사용할 수 없기 때문에, 실제 인스턴스와 같은 타입의 참조변수로 형변환을 해야만 인스턴스의 모든 멤버들을 사용할 수 있다.
+
+> 어떤 타입에 대한 instanceof연산의 결과가 true라는 것은 검사한 타입으로 형변환이 가능하다는 것을 뜻한다.
+
+## 매개변수의 다형성
+
+다형성의 특성은 변수의 타입뿐만 아니라 인터페이스나 파라미터에서 똑같이 적용한다.
+
+```java
+class Product { 
+  int price;  // 제품 가격
+  int bonusPoint; // 제품 구매시 제공되는 보너스 점수
+}
+class Tv extends Product {}
+class Computer extends Product {}
+class Audio extends Product {}
+class Buyer {   // 고객
+  int money = 1000; // 소유금액
+  int bonusPoint = 0;  // 보너스 점수
+}
+```
+
+Product클래스는 Tv, Computer, Audio클래스의 부모이고, Buyer클래스는 제품을 구입하는 사람을 클래스로 표현한 것이다.
+Buyer클래스에 물건을 구입하는 기능을 추가하고 싶은데 새로운 기능을 구현할 때마다 메서드를 추가적으로 넣어야 하지만, 다형성을 적용하면 간단하게 만들 수 있다.
+
+```java
+void buy(Product p){ // Tv, Audio, Computer 포함되어 있다.
+  money = money - p.price;
+  bonusPoint = bonusPoint + p.bonusPoint;
+}
+```
+
+매개변수가 Product타입의 참조변수라는 것은, 메서드의 매개변수로 Product클래스의 자식타입의 참조변수면 어느 것이나 매개변수로 받아들일 수 있다는 뜻이다.
+
+## 참조 
+
+- 자바의 정석
+- [다형성에 대한 블로그 참조글](https://inpa.tistory.com/entry/OOP-JAVA%EC%9D%98-%EB%8B%A4%ED%98%95%EC%84%B1Polymorphism-%EC%99%84%EB%B2%BD-%EC%9D%B4%ED%95%B4)
+- [업캐스트 다운캐스트 참조 블로그](https://inpa.tistory.com/entry/JAVA-%E2%98%95-%EC%97%85%EC%BA%90%EC%8A%A4%ED%8C%85-%EB%8B%A4%EC%9A%B4%EC%BA%90%EC%8A%A4%ED%8C%85-%ED%95%9C%EB%B0%A9-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0#instanceof_%EC%97%B0%EC%82%B0%EC%9E%90)
