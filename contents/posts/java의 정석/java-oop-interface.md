@@ -75,5 +75,17 @@ class Fighter implements Fightable {
 구현하는 인터페이스의 메서드 중 일부만 구현한다면, abstract를 붙여서 추상클래스로 선언해야 한다.
 
 ```java
-abstract 
+abstract class Fighter implements Fightable {
+  public void move(int x, int y) { /* 생략 */}
+}
 ```
+
+자식클래스에 상속(extends)과 구현(implements)을 동시에 할 수 있다.
+
+```java
+class Fighter extends Unit implements Fightable {
+  public void move(int x, int y) { /* 생략 */ }
+  public void attack(Unit u) { /* 생략 */ }
+}
+```
+
