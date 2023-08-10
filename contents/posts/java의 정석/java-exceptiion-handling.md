@@ -1,6 +1,6 @@
 ---
 title: "[Java] 예외처리(exception handling)"
-description: "예외처리, try-catch"
+description: "예외처리, try-catch, 멀티 catch, try-catch-finally"
 date: 2023-08-09
 update: 2023-08-09
 tags:
@@ -14,7 +14,9 @@ series: "Java 기초"
 오류 및 오타가 난무할 수 있으며, 많이 부족한 글입니다.
 ```
 
-## 1.1 프로그램 오류
+## 자바 에러와 예외 클래스
+
+### 프로그램 오류
 
 프로그램이 실행 중 어떤 원인에 의해서 오작동을 하거나 비정상적으로 종료되는 경우가 있다. 이런 원인을 프로그램 에러 또는 오류라고 한다.
 
@@ -27,7 +29,7 @@ series: "Java 기초"
 - 에러: 메모리 부족(outofMemoryError)이나 스택오버플로우(StackOverflowError)와 같이 일단 발생하면 복구할 수 없는 심각한 오류. 프로그램의 비정상적인 종료를 막을 길이 없다.
 - 예외: 발생하더라도 수습될 수 있는 비교적 덜 심각한 것이다. 발생하더라도 프로그래머가 이에 대한 적절한 코드를 미리 작성해 놓음으로써 프로그램의 비정상적인 종료를 막을 수 있다.
 
-## 1.2 예외 클래스의 계층구조
+### 예외 클래스의 계층구조
 
 자바에서는 실행 시 발생할 수 있는 오류(Exception과 Error)를 클래스로 정의하였다. 모든 클래스의 조상은 Object클래스이므로 Exception과 Error클래스 역시 Object클래스의 자손들이다.
 
@@ -47,7 +49,7 @@ series: "Java 기초"
     - ClassCastException : 클래스 간의 형변환을 잘못했을 경우
     - ArithmeticException : 정수를 0으로 나누려고 하는 경우
 
-## 1.3 예외처리하기 -try-catch문
+## 자바 예외 처리(try-catch) 문법
 
 **예외처리(exception handling)**
 
@@ -56,7 +58,8 @@ series: "Java 기초"
 
 예외를 처리하지 못하면, 프로그램은 비정상적으로 종료되고, 처리되지 못한 예외(uncaught exception)는 JVM의 예외처리기(UncaughtExceptionHandler)가 받아서 예외의 원인을 화면에 출력한다.
 
-try-catch문
+### -try-catch문
+
 
 ```java
 try {
@@ -70,70 +73,151 @@ try {
 }
 ```
 
+- catch문의 `Exception e`에서 Exception은 변수의 클래스 타입이고 e는 변수이다.
 - 하나의 try블럭 다음에는 여러 종류의 예외를 처리할 수 있도록 하나 이상의 catch블럭이 올 수 있다.
     - 발생한 예외의 종류와 일치하는 단 한개의 catch블럭만 수행된다
     - 발생한 예외의 종류와 일치하는 catch블럭이 없으면 예외는 처리되지 않는다.
 - try블럭이나 catch블럭 내에 포함된 문장이 하나뿐이어도 괄호{}를 생략할 수 없다.
+- catch 블럭에서 괄호() 내에서는 처리하고자 하는 예외와 같은 타입의 참조변수 하나를 선언해야한다.
+
 
 ```java
 class ExceptionExample {
 	public static void main(String[] args){
 		try {
-				1. try블럭에 또 다른 try-catch문이 포함
+				// try블럭에 또 다른 try-catch문이 포함
 				try {  } catch (Exception e) { }
-		} catch (Exception **e**) { 
-				3. catch블럭 내 선언된 변수는 catch블럭 내에서 유효하기
-						때문에 참조변수 'e' 하나만 사용해도 된다.
-				2. catch블럭에 또 다른 try-catch문이 포함
-				try {  } catch (Exception **e**) { } 
+		} catch (Exception e) { 
+				// catch블럭에 또 다른 try-catch문이 포함
+				try {  } catch (Exception e) { } 
 				// 에러. 변수 e가 중복 선언되었다.
 		} // try-catch의 끝
 
 		try {
-
+			// ...
 		} catch (Exception e) {
-
-		} // try-catch의 끝
-	} // main메서드의 끝
-}
-```
-
-### ArithmeticException
-
-산술연산과정에서 오류가 있을 때 발생하는 예외이며, 정수는 0으로 나누는 것이 금지되어 있어서 발생한다. 하지만 실수를 0으로 나누는 것은 금지되어 있지 않아서 예외가 발생하지 않는다.
-
-```java
-class ExceptionExample {
-	public static void main(String[] args) {
-		int number = 100;
-		int result = 0;
-		
-		for(int i = 0; i < 10; i++) {
-			try {
-					result = number / (int)(Math.random() * 10);
-					System.out.println(result);
-			} catch (ArithmeticException e) {
-					System.out.println("0");
-					// ArithmeticException이 발생하면 실행되는 코드
-			} 
+			// ...
 		}
 	}
 }
 ```
 
+catch 블럭의 괄호 내에 선언된 변수는 catch 블럭 내에서만 유효하기 때문에, e를 하나만 사용해도 된다.
+
+### try-catch-finally
+
+finally블럭은 예외의 발생여부에 상관없이 실행되어야 할 코드를 포함시킬 목적으로 사용된다.
+
 ```java
-16
-20
-11
-0  <- ArithmeticException이 발생해서 0이 출력되었다.
-25
-100
-25
-33
-14
-12
+try {
+	// 예외가 발생할 가능성이 있는 문장들을 넣는다.
+} catch (Exception e1) {
+	// 예외처리를 위한 문장을 적는다
+} finally {
+	// 예외의 발생여부에 관계없이 항상 수행되어야 하는 문장들을 넣는다.
+	// finally블럭은 try-catch문의 맨 마지막에 위치해야한다.
+}
 ```
 
-4번째 0이 출력된 것은 for문의 4번째 반복에서 ArithmeticException이 발생했기 때문이다. ArithmeticException에 해당하는 catch블럭을 찾아서 그 catch블럭 내의 문장들을 실행한 다음 try-catch문을 벗어나 for문의 다음 반복을 계속 수행하여 작업을 모두 마치고 정상적으로 종료되었다. 
+- 예외가 발생할 경우 : `try -> catch -> finally` 순 실행
+- 예외가 발생하지 않은 경우 : `try -> finally` 순 실행
 
-만일 예외처리 하지 않았다면, 세 번줄 까지만 출력되고 예외가 발생해서 종료되었을 것이다.
+```java
+try {
+	startInstall();	// 프로그램 설치에 필요한 준비를 한다.
+	copyFiles();	// 파일들을 복사한다
+	deleteTempFiles();	// 프로그램 설치에 사용된 임시파일들을 삭제한다.
+} catch (Exception e){
+	e.printStackTrace();
+	deleteTempFiles();	// 프로그램 설치에 사용된 임시파일들을 삭제한다.
+}
+
+static void startInstall() { /* 프로그램 설치에 필요한 준비하는 코드를 적는다 */ }
+static void copyFiles() { /* 파일들을 복사하는 코드를 적는다 */ }
+static void deleteTempFiles() { /* 임시파일들을 삭제하는 코드를 적는다 */}
+```
+
+try블럭의 문장을 수행하는 동안에(프로그램을 설치하는 과정), 예외의 발생여부에 관계없이 deleteTempFiles()메서드는 실행되어야 한다. 
+
+```java
+try {
+	startInstall();	// 프로그램 설치에 필요한 준비를 한다.
+	copyFiles();	// 파일들을 복사한다
+} catch (Exception e){
+	e.printStackTrace();
+} finally {
+	deleteTempFiles();	// 프로그램 설치에 사용된 임시파일들을 삭제한다.
+}
+
+static void startInstall() { /* 프로그램 설치에 필요한 준비하는 코드를 적는다 */ }
+static void copyFiles() { /* 파일들을 복사하는 코드를 적는다 */ }
+static void deleteTempFiles() { /* 임시파일들을 삭제하는 코드를 적는다 */}
+```
+
+그리고 try블럭에서 return문이 실행되는 경우에도 finally블럭의 문장들이 먼저 실행되고, 현재 실행 중인 메서드를 종료한다.
+catch블럭의 문장 수행 중에 return문을 만나도 finally블럭의 문장들은 수행된다.
+
+### 멀티 catch문
+
+- JDK 1.7부터 여러 catch블럭을 `|` 기호를 통해 하나의 catch 블럭으로 합칠 수 있다.
+- 중복된 코드를 줄일 수 있고, 연결할 수 있는 예외 클래스 개수에 제한이 없다.
+
+```java
+try {
+	...
+} catch (ExceptionA | ExceptionB e){
+	e.printStackTrace();
+}
+```
+
+멀티 catch 블럭으로 연결된 예외 클래스가 부모와 자식의 관계에 있다면 컴파일 에러가 발생한다.
+
+```java
+try {
+	...
+} catch (ParentException | ChildException e) { // 에러! -> (ParentException e)
+	e.printStackTrace();
+}
+```
+
+- 두 예외 클래스가 부모-자식의 관계라면, 부모 클래스만 써주는 것과 똑같기 때문이다. 
+	- 멀티 catch는 **하나의 catch블럭으로 여러 예외를 처리하는 것**이기에, 발생한 예외를 멀티 catch블럭으로 처리했을 경우, 실제로 어떤 예외가 발생한 건지 알 수 없다.
+	- 참조변수 `e`로 멀티 catch블럭에 연결된 예외 클래스들의 공통 분모인 부모 예외 클래스에 선언된 멤버만 사용할 수 있다.
+- 각 예외마다 세세하게 제어하고 싶으면 `instanceof`로 확인하고 써야 한다.
+
+```java
+try {
+	...
+} catch (ExceptionA | ExceptionB e){
+	if(e instanceof ExceptionA){
+		// ...
+	} else {	// if(e instanceof ExceptionB)
+		// ...
+	}
+}
+```
+
+### 예외 메시지 출력
+
+catch 블럭의 괄호()에 선언된 참조변수를 통해 접근할 수 있으며, 이 참조변수는 선언된 catch 블럭 내에서만 사용이 가능하다.
+- **printStackTrace()** : 예외발생 당시의 호출스택(Call Stack)에 있었던 메서드의 정보와 예외 메시지를 화면에 출력한다.
+- **getMessage()** : 발생한 예외클래스의 인스턴스에 저장된 메시지를 얻을 수 있다.
+
+```java
+try {
+	...
+	System.out.println(0/0); // ArithmeticException 예외발생
+	...
+} catch (ArithmeticException e){
+	// 상세한 에러 추적 메시지
+	e.printStackTrace();
+	// 에러 메시지
+	System.out.println("예외메시지 : " + e.getMessage());
+}
+```
+
+ArithmeticException인스턴스의 printStackTrace()를 사용해서, 호출스택(call stack)에 대한 정보와 예외 메시지를 출력할 수 있다.
+
+## 자바 Try with Resource 예외 처리
+
+## 예외 던지기(throw)와 연결된 예외(chained exception)
