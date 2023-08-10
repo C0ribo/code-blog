@@ -79,7 +79,7 @@ try {
     - 발생한 예외의 종류와 일치하는 catch블럭이 없으면 예외는 처리되지 않는다.
 - try블럭이나 catch블럭 내에 포함된 문장이 하나뿐이어도 괄호{}를 생략할 수 없다.
 - catch 블럭에서 괄호() 내에서는 처리하고자 하는 예외와 같은 타입의 참조변수 하나를 선언해야한다.
-
+- 예외가 발생하면, 발생한 예외에 해당하는 클래스의 인스턴스가 만들어진다.
 
 ```java
 class ExceptionExample {
@@ -103,6 +103,12 @@ class ExceptionExample {
 ```
 
 catch 블럭의 괄호 내에 선언된 변수는 catch 블럭 내에서만 유효하기 때문에, e를 하나만 사용해도 된다.
+
+- try블럭 내에서 예외가 발생한 경우, 
+	1. 발생한 예외와 일치하는 catch블럭이 있는지 확인한다.
+	2. 일치하는 catch블럭을 찾게 되면, 그 catch블럭 내의 문장들을 수행하고 전체 try-catch문을 빠져나가서 그 다음 문장을 계속해서 수행한다. 만일 일치하는 catch블럭을 찾지 못하면, 예외는 처리되지 못한다.
+- try블럭 내에서 예외가 발생하지 않은 경우,
+	1. catch 블럭을 거치지 않고 전체 try-catch문을 빠져나가서 수행을 계속한다.
 
 ### try-catch-finally
 
@@ -217,6 +223,44 @@ try {
 ```
 
 ArithmeticException인스턴스의 printStackTrace()를 사용해서, 호출스택(call stack)에 대한 정보와 예외 메시지를 출력할 수 있다.
+
+### 예외 발생
+
+throw룰 사용해서 프로그래머가 고의로 예외를 발생시킬 수 있다.
+
+1. 먼저, 연산자 new를 이용해서 발생시키려는 예외 클래스의 객체를 만든 다음
+	
+	`Exception e = new Exception("고의로 발생시켰음");`
+
+2. 키워드 throw를 이용해서 예외를 발생시킨다.
+
+	`throw e;`
+
+```java
+try {
+	Exception e = new Exception("고의로 발생시켰음");// 발생시키려는 예외클래스의 객체 만듬
+	throw e;	// 예외를 발생시킴
+	
+	throw new Exception("고의로 발생시킴"); // 위 두줄 한줄로 줄인 것
+}	catch (Exception e){
+	// ...
+}
+```
+
+#### 메서드에 예외 선언
+
+- 메서드의 선언부에 `throws`를 사용해서 메서드 내에서 발생할 수 있는 예외를 적어준다.
+- 여러 개알 경우 쉼표`,`로 구분한다.
+
+```java
+void method() throws Exception1, Exception2, ... ExceptionN {
+	// 메서드 내용
+}
+```
+
+> 예외를 발생시키는 throw와 예외를 메서드에 선언할 때 쓰는 throws 구분
+
+
 
 ## 자바 Try with Resource 예외 처리
 
