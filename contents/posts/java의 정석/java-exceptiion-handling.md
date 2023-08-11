@@ -224,9 +224,46 @@ try {
 
 ArithmeticException인스턴스의 printStackTrace()를 사용해서, 호출스택(call stack)에 대한 정보와 예외 메시지를 출력할 수 있다.
 
+
+## 자바 Try with Resource 예외 처리
+
+- JDK 1.7부터 try-with-resources문이라는 try-catch문의 변형이 새로 추가되었다.
+- `try-with-resources`문은 입출력(I/O)과 관련된 클래스를 사용할 때 유용하다.
+
+```java
+try(파일을 열거나 자원을 할당하는 명령문){
+	// try 블럭의 괄호()안에 변수선언이 가능하고, 선언변수는 try블럭 내에서 사용 가능
+	// ... 
+}
+```
+
+```java
+try (FileInputStream fis = new FileInputStream("score.dat");
+	DataInputStream dis = new DataInputStream(fis)) {
+	while(true){
+		score = dis.readInt();
+		System.out.ptintln(score);
+		sum += score;
+	}
+}	catch (EOFException e){
+	System.out.println("점수의 총합은 "+ sum + "입니다.");
+}	catch (IOException ie){
+	ie.printStackTrace();
+}
+```
+
+`try-with-resources`문의 괄호() 안에 객체를 생성하는 문장을 넣으면, 따로 `close()`를 호출을 하지 않아도 try블럭을 벗어나는 순간 자동적으로 `close()`가 호출된다. 그 다음에 catch 블럭 또는 finally 블럭이 수행된다.
+
+```java
+void addSuppressed(Throwable exception) // 억제된 예외를 추가
+Throwable[] getSuppressed()	// 억제된 예외(배열)를 반환
+```
+
+## 예외 던지기(throw)와 연결된 예외(chained exception)
+
 ### 예외 발생
 
-throw룰 사용해서 프로그래머가 고의로 예외를 발생시킬 수 있다.
+throw를 사용해서 프로그래머가 고의로 예외를 발생시킬 수 있다.
 
 1. 먼저, 연산자 new를 이용해서 발생시키려는 예외 클래스의 객체를 만든 다음
 	
@@ -247,10 +284,10 @@ try {
 }
 ```
 
-#### 메서드에 예외 선언
+### 메서드에 예외 선언
 
 - 메서드의 선언부에 `throws`를 사용해서 메서드 내에서 발생할 수 있는 예외를 적어준다.
-- 여러 개알 경우 쉼표`,`로 구분한다.
+- 여러 개일 경우 쉼표`,`로 구분한다.
 
 ```java
 void method() throws Exception1, Exception2, ... ExceptionN {
@@ -258,10 +295,91 @@ void method() throws Exception1, Exception2, ... ExceptionN {
 }
 ```
 
-> 예외를 발생시키는 throw와 예외를 메서드에 선언할 때 쓰는 throws 구분
+> 예외를 발생시키는 `throw`와 예외를 메서드에 선언할 때 쓰는 `throws` 구분
+
+모든 예외의 최고조상인 Exception클래스를 메서드에 선언하면, 이 메서드는 모든 종류의 예외가 발생할 가능성이 있다는 뜻이다.
+
+```java
+void method() throws Exception {
+	// 메서드 내용
+}
+```
+
+```
+블로그 작성하는데 오래걸려서 나중에 작성 예정
+```
+
+### 예외 되던지기(exception re-throwing)
+
+예외를 처리한 후에 인위적으로 다시 발생시키는 방법을 **예외 되던지기(exception re-throwing)**이라 한다.
+- 예외가 발생할 가능성이 있는 메서드에서 try-catch문을 사용해서 예외를 처리해주고 catch문에서 필요한 작업을 행한 후 throw문을 사용해서 예외를 다시 발생시킨다.
+- 다시 발생한 예외는 이 메서드를 호출한 메서드에게 전달되고 호출한 메서드의 try-catch문에서 예외를 또 다시 처리한다.
+
+```
+시간 너무 오래걸려서 개인 이해로 끝
+```
+
+### 연결된 예외(chained exception)
+
+#### 예외를 다른 예외로 감싸 던지기
+
+한 예외가 다른 예외를 발생시킬 수 있다.
+
+A가 예외 B를 발생시켰다면, A를 B의 **원인 예외(cause exception)**이라 한다.
+
+`Throwable initCause(Throwable cause)` : 지정된 예외를 원인 예외로 등록
+
+`Throwable getCause()` : 원인 예외를 반환
+
+initCause()은 Exception 클래스의 조상인 Throwable 클래스에 정의되어 있기 때문에 모든 예외에서 사용 가능하다.
+
+> 원인 예외로 등록해서 다시 에외를 발생시키는 이유는 **여러가지 예외를 하나의 큰 분류의 예외로 묶어서 다루기 위해**서이다.
+
+```java
+try {
+	startInstall();	// SpaceException 발생
+	copyFiles();
+} catch (SpaceException e){
+	InstallException ie = new InstallException("설치중 예외발생"); // 예외 생성
+	ie.initCause(e); // InstallException의 원인 예외를 SpaceException으로 지정
+	throw ie; // InstallException을 발생시킨다
+} catch (MemoryException me) {
+	...
+}
+```
+
+- InstallException을 생성 후, `initCause()`로 SpaceException을 InstallException의 원인 예외로 등록한다. 
+- `throw`로 예외를 던진다.
 
 
 
-## 자바 Try with Resource 예외 처리
+#### checked 예외를 unchecked 예외로 변환
 
-## 예외 던지기(throw)와 연결된 예외(chained exception)
+- 컴파일러가 예외처리를 확인하지 않은 RuntimeException클래스들은 `unchecked예외`
+- 예외처리를 확인하는 Exception클래스들은 `checked예외`
+
+```java
+static void startInstall() throws SpaceException, MemoryException{
+	if(!enoughSpace())	// 충분한 설치 공간이 없으면..
+		throw new SpaceException("설치할 공간이 부족한다.");
+	if(!enoughMemory())	// 충분한 메모리가 없으면..
+		throw new MemoryException("메모리가 부족합니다");
+}
+```
+
+```java
+static void startInstall() throws SpaceException{
+	if(!enoughSpace())	// 충분한 설치공간이 없으면...
+		throw new SpaceException("설치할 공간이 부족합니다");
+	if(!enoughMemory())	// 충분한 메모리가 없으면...
+		throw new RuntimeException(new MemoryException("메모리가 부족합니다"));
+}
+```
+
+- MemoryException은 Exception의 자식이므로 반드시 예외를 처리해야하는데, <br>이 예외를 RuntimeException으로 감싸버렸기 때문에 `unchecked예외`가 되었다.
+	- startInstall()의 선언부에 MemoryException을 선언 안해도 된다.
+	- initCause() 대신에 RuntimeException의 생성자 사용
+
+```java
+RuntimeException (Throwable cause) // 원인 예외를 등록하는 생성자
+```
