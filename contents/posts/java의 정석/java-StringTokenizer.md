@@ -14,6 +14,11 @@ series: "Java 기초"
 오류 및 오타가 난무할 수 있으며, 많이 부족한 글입니다.
 ```
 
+## StringTokenizer란?
+
+긴 문자열로 지정된 구분자(delimiter)를 기준으로 토큰(token)이라는 여러 개의 문자열로 잘라내는데 사용된다.
+
+
 ## StringTokenizer 생성자
 
 | 생성자 | 설명 |
@@ -24,11 +29,11 @@ series: "Java 기초"
 
 ## StringTokenizer 메서드
 
-| 메서드 | 설명 |
-| --- | --- |
-| int countTokens() | 전체 토큰의 수를 반환한다 |
-| boolean hasMoreTokens() | 토큰이 남아있는지 알려준다<br>토큰이 존재 시 true, 토큰이 없으면 false 반환 | 
-| boolean hasMoreElements() | 내부적으로 hasMoreTokens() 메서드를 호출하므로 동작 방식으로 반환 결과는 hasMoreTokens() 메서드와 동일하다. |
-| String nextToken() | 사용 가능한 다음 토큰을 문자열로 반환한다 | 
-| String nextToken(String delim) | 매개변수로 전달받은 구분 기호를 기준으로 분활된 다음 토큰을 문자열로 반환한다 |
-|Object nextElement() | 내부적으로 nextToken() 메서드를 호출하지만, 반환 타입이 Object 라는 차이점이 있다. | 
+|반환값 | 메서드 | 설명 |
+|---| --- | --- |
+| int| countTokens() | 전체 토큰의 수를 반환한다 |
+| boolean| hasMoreTokens() | 토큰이 남아있는지 알려준다<br>토큰이 존재 시 true, 토큰이 없으면 false 반환 | 
+| boolean| hasMoreElements() | 내부적으로 hasMoreTokens() 메서드를 호출하므로 동작 방식으로 반환 결과는 hasMoreTokens() 메서드와 동일하다. |
+| String| nextToken() | 사용 가능한 다음 토큰을 문자열로 반환한다 | 
+| String| nextToken(String delim) | 매개변수로 전달받은 구분 기호를 기준으로 분활된 다음 토큰을 문자열로 반환한다 |
+|Object| nextElement() | 내부적으로 nextToken() 메서드를 호출하지만, 반환 타입이 Object 라는 차이점이 있다. | 
