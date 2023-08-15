@@ -1,6 +1,6 @@
 ---
 title: "[Java] 상속(inheritance)"
-description: "상속, 자식 클래스, 부모 클래스, "
+description: "상속, 자식 클래스, 부모 클래스 "
 date: 2023-07-28
 update: 2023-07-28
 tags:
