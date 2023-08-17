@@ -1,6 +1,6 @@
 ---
 title: "[Java] Date 클래스"
-description: "Calendar클래스, getInstance(), Date클래스 "
+description: "Calendar클래스, getInstance(), Date클래스, add(), roll() "
 date: 2023-08-16
 update: 2023-08-16
 tags:
@@ -86,3 +86,68 @@ get 메서드의 매개변수로 사용되는 int값들은 Calendar에 정의된
 ```java
 getActualMaximum(Calendar.Date) // 이 달의 마지막 일
 ```
+
+### 두 날짜 간의 차이
+
+두 날짜를 최소단위인 초단위 변경 후 차이를 구한다.
+
+```java
+void set(int field, int value) // 해당 field를 value값으로
+void set(int year, int month, int date) // 년, 월, 일
+void set(int year, int month, int date, int hourOfDay, int minute) // 년, 월, 일, 시, 분
+void set(int year, int month, int date, int hourOfDay, int minute, int second) // 년, 월, 일, 시, 분, 초
+```
+
+> `getTimeInMillis()` 초단위로 얻기 위해 **1000** 나눠야하고, 일단위를 얻기 위해 **24시간 * 60분 * 60초 * 1000** 으로 나눠야 한다.
+
+### add() 메서드
+
+add(int field, int amount)
+
+- 지정 필드의 값을 원하는 만큼 증가 또는 감소
+- 특정 날짜 또는 시간을 기점으로 일정기간 전후의 날짜와 시간을 알 수 있음
+- 다른 필드에 영향을 줌
+- 음수 사용 가능
+
+```
+날짜필드(Calendar.Date)값 31 증가 시 다음 달로 넘어가므로 월 필드(Calendar.Month)도 1증가
+```
+
+### roll() 메서드
+
+roll(int field, int amount)
+
+- 지정 필드의 값을 증가 또는 감소시키는 메서드
+- 다른 필드에 영향을 주지 않음
+
+```
+월 필드의 값은 변하지 않고 일 필드의 값만 바뀜 
+```
+
+> 일 필드가 말 일(end of month)일 때, roll 메서드를 이용해서 월 필드를 변경하면 일 필드에 영향을 미칠 수 있다.<br> 3월 31일에서 Month -1 하면 2월 28일
+
+다음 달의 1일에서 하루를 빼면 이번 달의 마지막 일을 알 수 있다.
+
+### 날짜계산을 위한 메서드
+
+```java
+boolean isLeapYear(int year)
+    // 매개변수 year가 윤년이면 true, 그렇지 않으면 false 반환
+int dayDiff(int y1, int m1, int d1, int y2, int m2, int d2)
+    // 두 날짜 간의 차이를 일단위로 반환
+int getDayOfWeek(int year, int month, int day)
+    // 지정된 날짜의 요일을 반환(1~7, 1이 일요일)
+String convertDayToDate(int day)
+    // 일단위의 값을 년월일의 형태의 문자열로 변환하여 반환
+int convertDateToDay(int year, int month, int day)
+    // 년월일을 입력받아서 일단위로 변환
+```
+
+- 두 날짜의 차이 : 일단위로 변환 뒤, 두 값을 빼줌
+- 요일 구하기 : 일단위로 변환 후 요일의 개수인 7 나누고, 요일이 1부터 시작하기 떄문에 1을 더한다.
+    - Calendar의 요일범위가 1~7이기 때문에 동일처리
+
+
+## 참조
+
+- 자바의 정석
