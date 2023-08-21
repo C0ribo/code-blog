@@ -62,26 +62,26 @@ get 메서드의 매개변수로 사용되는 int값들은 Calendar에 정의된
 
 | 필드명 | 설명 |
 |--- | --- |
-|YEAR | 년 |
-|MONTH | 월(0~11)<br>0 -> 1월, 11 -> 12월 |
-|WEEK_OF_YEAR | 그 해의 몇번째 주 |
-|WEEK_OF_MONTH | 그 달의 몇번째 주 |
-|DATE | 일 |
-|DAY_OF_MONTH | 그 달의 몇번째 일 |
-|DAY_OF_YEAR | 그 해의 몇번째 일 |
-|DAY_OF_WEEK | 요일(1~7)<br>1 -> 일요일 |
-|DAY_OF_WEEK_IN_MONTH | 그 달의 몇 번째 요일 |
+|`YEAR` | 년 |
+|`MONTH` | 월(0~11)<br>0 -> 1월, 11 -> 12월 |
+|`WEEK_OF_YEAR` | 그 해의 몇번째 주 |
+|`WEEK_OF_MONTH` | 그 달의 몇번째 주 |
+|`DATE` | 일 |
+|`DAY_OF_MONTH` | 그 달의 몇번째 일 |
+|`DAY_OF_YEAR` | 그 해의 몇번째 일 |
+|`DAY_OF_WEEK` 요일(1~7)<br>1 -> 일요일 |
+|`DAY_OF_WEEK_IN_MONTH` | 그 달의 몇 번째 요일 |
 
 **시간 필드**
 | 필드명 | 설명 |
 |--- | --- |
-|HOUR | 시간(0~11) | 
-|HOUR_OF_DAY | 시간(0~23) |
-|MINUTE | 분 |
-|SECOND | 초 |
-|MILLISECOND | 1/1000초 |
-|ZONE_OFFSET | GMT기준시차(-12~12) |
-|AM_PM | 오전/오후 |
+|`HOUR` | 시간(0~11) | 
+|`HOUR_OF_DAY` | 시간(0~23) |
+|`MINUTE` | 분 |
+|`SECOND` | 초 |
+|`MILLISECOND` | 1/1000초 |
+|`ZONE_OFFSET` | GMT기준시차(-12~12) |
+|`AM_PM` | 오전/오후 |
 
 ```java
 getActualMaximum(Calendar.Date) // 이 달의 마지막 일
