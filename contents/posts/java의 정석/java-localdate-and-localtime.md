@@ -69,18 +69,18 @@ LocalTime birthTime = LocalTime.parse("23:59:59");
 | --- | --- | --- |
 | **LocalDate** | int get(TemporalField field)<br>long getLong(TemporalField field) | 해당 날짜, 시간 객체의 명시된 필드의 값을 int형이나 long형으로 반환 |
 |  | int getYear() | 해당 날짜 객체의 연도(YEAR)필드의 값 반환 |
-|  | int getMonthValue() | 해당 날짜 객체의 월(MONTH_ OF_YEAR) 필드의 값을 반환함. (1~12) |
-|  | Month getMonth() | 해당 날짜 객체의 월(MONTH_ OF_YEAR) 필드의 값을 Month 열거체를 이용하여 반환함. |
-|  | int getDayOfMonth() | 해당 날짜 객체의 일(DAY_ OF_MONTH) 필드의 값을 반환함. (1~31) |
-|  | int getDayOfYear() | 해당 날짜 객체의 일(DAY_ OF_YEAR) 필드의 값을 반환함. (1~365, 윤년이면 366) |
-|  | DayOfWeek getDayOfWeek() | 해당 날짜 객체의 요일(DAY_ OF_WEEK) 필드의 값을 DayOfWeek 열거체를 이용하여 반환함. |
+|  | int getMonthValue() | 해당 날짜 객체의 월(`MONTH_OF_YEAR`) 필드의 값을 반환함. (1~12) |
+|  | Month getMonth() | 해당 날짜 객체의 월(`MONTH_OF_YEAR`) 필드의 값을 Month 열거체를 이용하여 반환함. |
+|  | int getDayOfMonth() | 해당 날짜 객체의 일(`DAY_OF_MONTH`) 필드의 값을 반환함. (1~31) |
+|  | int getDayOfYear() | 해당 날짜 객체의 일(`DAY_OF_YEAR`) 필드의 값을 반환함. (1~365, 윤년이면 366) |
+|  | DayOfWeek getDayOfWeek() | 해당 날짜 객체의 요일(`DAY_OF_WEEK`) 필드의 값을 DayOfWeek 열거체를 이용하여 반환함. |
 |  | int lengthOfMonth() | 같은 달의 총 일수(31) |
 |  | int lengthOfYear() | 같은 해의 총 일수(365), 윤년이면 366 |
 |  | boolean isLeapYear() | 윤년 여부 확인(false) |
-| **LocalTime** | int getHour() | 해당 시간 객체의 시(HOUR_ OF_DAY) 필드의 값을 반환함. |
-|  | int getMinute() | 해당 시간 객체의 분(MINUTE_OF_ HOUR) 필드의 값을 반환함. |
-|  | int getSecond() | 해당 시간 객체의 초(SECOND_ OF_ MINUTE) 필드의 값을 반환함. |
-|  | int getNano() | 해당 시간 객체의 나노초(NANO_ OF_ SECOND) 필드의 값을 반환함. |
+| **LocalTime** | int getHour() | 해당 시간 객체의 시(`HOUR_OF_DAY`) 필드의 값을 반환함. |
+|  | int getMinute() | 해당 시간 객체의 분(`MINUTE_OF_HOUR`) 필드의 값을 반환함. |
+|  | int getSecond() | 해당 시간 객체의 초(`SECOND_OF_MINUTE`) 필드의 값을 반환함. |
+|  | int getNano() | 해당 시간 객체의 나노초(`NANO_OF_SECOND`) 필드의 값을 반환함. |
 
 #### **TemporaField 인터페이스**
 
@@ -88,35 +88,35 @@ LocalTime birthTime = LocalTime.parse("23:59:59");
 
 | TemporaField(ChronoField) | 설명 |
 | --- | --- |
-| ERA | 시대 |
-| YEAR_ OF_ERA, YEAR | 연도 |
-| MONTH_ OF_YEAR | 월 |
-| DAY_ OF_WEEK | 요일(1:월,..,7:일) |
-| DAY_ OF_MONTH | 일 |
-| AMPM_ OF_DAY | 오전/오후 |
-| HOUR_ OF_DAY | 시간(0~23), 밤 12시 → 0 |
-| CLOCK_ HOUR_ OF_DAY | 시간(1~24), 밤 12시 → 24 |
-| HOUR_ OF_AMPM | 시간(0~11) |
-| CLOCK_ HOUR_ OF_AMPM | 시간(1~12) |
-| MINUTE_ OF_HOUR | 분 |
-| SECOND_ OF_MINUTE | 초 |
-| MILLI_ OF_SECOND | 천분의 일초(10^-3초) |
-| MICRO_ OF_SECOND | 백만분의 일초(10^-6초) |
-| NANO_ OF_SECOND | 10억분의 일초(10^-9초) |
-| DAY_ OF_YEAR | 해당 연도의 몇 번째 날(1~365, 윤년 366) |
-| EPOCH_DAY | EPOCH(1970년 1월 1일)을 기준으로 몇 번째 날 |
-| MINUTE_ OF_DAY | 그 날의 몇 번째 분(시간을 분으로 환산) |
-| SECOND_ OF_DAY | 그 날의 몇 번째 초(시간을 초로 환산) |
-| MILLI_ OF_DAY | 그 날의 몇 번째 밀리초(10^-3초) |
-| MICRO_ OF_DAY | 그 날의 몇 번째 마이크로초(10^-6초) |
-| NANO_ OF_DAY | 그 날의 몇 번째 나노초(10^-9초) |
-| ALIGNED _ WEEK_OF_MONTH | 그 달의 n번째 주(1~7일 1주, 8~14일 2주,..) |
-| ALIGNED_ WEEK_ OF_YEAR | 그 해의 n번째 주(1월 1~7일 1주, 8~14일 2주,..) |
-| ALIGNED_ DAY_OF _WEEK _IN _MONTH | 요일(그 달의 1일을 월요일로 간주해 계산) |
-| ALIGNED_DAY _OF _WEEK _IN _YEAR | 요일(그 해의 1월 1일을 월요일로 간주해 계산) |
-| INSTANT_SECONDS | 년월일을 초단위로 환산(1970-01-01 00:00:00 UTC를 0초로 계산) Instant에만 사용가능 |
-| OFFSET_SECONDS | UTC와 시차, ZoneOffset에만 사용가능 |
-| PROLEPTIC_MONTH | 년월을 월단위로 환산(2015년11월=2015*12+11) |
+| `ERA` | 시대 |
+| `YEAR_OF_ERA`, `YEAR` | 연도 |
+| `MONTH_OF_YEAR` | 월 |
+| `DAY_OF_WEEK` | 요일(1:월,..,7:일) |
+| `DAY_OF_MONTH` | 일 |
+| `AMPM_OF_DAY` | 오전/오후 |
+| `HOUR_OF_DAY` | 시간(0~23), 밤 12시 → 0 |
+| `CLOCK_HOUR_OF_DAY` | 시간(1~24), 밤 12시 → 24 |
+| `HOUR_OF_AMPM` | 시간(0~11) |
+| `CLOCK_HOUR_OF_AMPM` | 시간(1~12) |
+| `MINUTE_OF_HOUR` | 분 |
+| `SECOND_OF_MINUTE` | 초 |
+| `MILLI_OF_SECOND` | 천분의 일초(10^-3초) |
+| `MICRO_OF_SECOND` | 백만분의 일초(10^-6초) |
+| `NANO_OF_SECOND` | 10억분의 일초(10^-9초) |
+| `DAY_OF_YEAR` | 해당 연도의 몇 번째 날(1~365, 윤년 366) |
+| `EPOCH_DAY` | EPOCH(1970년 1월 1일)을 기준으로 몇 번째 날 |
+| `MINUTE_OF_DAY` | 그 날의 몇 번째 분(시간을 분으로 환산) |
+| `SECOND_OF_DAY` | 그 날의 몇 번째 초(시간을 초로 환산) |
+| `MILLI_OF_DAY` | 그 날의 몇 번째 밀리초(10^-3초) |
+| `MICRO_OF_DAY` | 그 날의 몇 번째 마이크로초(10^-6초) |
+| `NANO_OF_DAY` | 그 날의 몇 번째 나노초(10^-9초) |
+| `ALIGNED_WEEK_OF_MONTH` | 그 달의 n번째 주(1~7일 1주, 8~14일 2주,..) |
+| `ALIGNED_WEEK_OF_YEAR` | 그 해의 n번째 주(1월 1~7일 1주, 8~14일 2주,..) |
+| `ALIGNED_DAY_OF_WEEK _IN _MONTH` | 요일(그 달의 1일을 월요일로 간주해 계산) |
+| `ALIGNED_DAY_OF_WEEK_IN_YEAR` | 요일(그 해의 1월 1일을 월요일로 간주해 계산) |
+| `INSTANT_SECONDS` | 년월일을 초단위로 환산(1970-01-01 00:00:00 UTC를 0초로 계산) Instant에만 사용가능 |
+| `OFFSET_SECONDS` | UTC와 시차, ZoneOffset에만 사용가능 |
+| `PROLEPTIC_MONTH` | 년월을 월단위로 환산(2015년11월=2015*12+11) |
 
 > 해당 클래스가 지원하지 않은 필드 사용 시, `UnsupportedTemporalTypeException` 발생
 > 
@@ -143,15 +143,15 @@ time = time.withHour(12); // 시간 12시로 변경
 | 클래스 | 메서드 | 설명 |
 | --- | --- | --- |
 | LocalDate | LocalDate with(TemporalField field, long newValue) | 해당 날짜 객체에서 특정 필드를 전달된 새로운 값으로 설정한 새로운 날짜 객체를 반환 |
-|  | LocalDate withYear(int year) | 해당 날짜 객체에서 연도(YEAR) 필드를 전달된 새로운 값으로 설정한 새로운 날짜 객체를 반환 |
-|  | LocalDate withMonth(int month) | 해당 날짜 객체에서 월(MONTH_ OF_YEAR) 필드를 전달된 새로운 값으로 설정한 새로운 날짜 객체를 반환 |
-|  | LocalDate withDayOfMonth(int dayOfMonth) | 해당 날짜 객체에서 일(DAY_ OF_MONTH) 필드를 전달된 새로운 값으로 설정된 새로운 날짜 객체를 반환 |
-|  | LocalDate withDayOfYear(int dayOfYear) | 해당 날짜 객체에서 DAY_ OF_YEAR필드를 전달된 새로운 값으로 설정한 새로운 날짜 객체를 반환 |
+|  | LocalDate withYear(int year) | 해당 날짜 객체에서 연도(`YEAR`) 필드를 전달된 새로운 값으로 설정한 새로운 날짜 객체를 반환 |
+|  | LocalDate withMonth(int month) | 해당 날짜 객체에서 월(`MONTH_OF_YEAR`) 필드를 전달된 새로운 값으로 설정한 새로운 날짜 객체를 반환 |
+|  | LocalDate withDayOfMonth(int dayOfMonth) | 해당 날짜 객체에서 일(`DAY_OF_MONTH`) 필드를 전달된 새로운 값으로 설정된 새로운 날짜 객체를 반환 |
+|  | LocalDate withDayOfYear(int dayOfYear) | 해당 날짜 객체에서 `DAY_OF_YEAR`필드를 전달된 새로운 값으로 설정한 새로운 날짜 객체를 반환 |
 | LocalTime | LocalTime with(TemporalField field, long newValue) | 해당 시간 객체에서 특정 필드를 전달된 새로운 값으로 설정한 새로운 시간 객체를 반환 |
-|  | LocalTime withHour(int hour) | 해당 시간 객체에서 시(HOUR_ OF_DAY) 필드를 전달된 새로운 값으로 설정한 새로운 시간 객체를 반환 |
-|  | LocalTime withMinute(int minute) | 헤당 시간 객체에서 분(MINUTE_ OF_HOUR) 필드를 전달된 새로운 값으로 설정한 새로운 시간 객체를 반환 |
-|  | LocalTime withSecond(int second) | 해당 시간 객체에서 초(SECOND_ OF_MINUTE) 필드를 전달된 새로운 값으로 설정한 새로운 시간 객체를 반환 |
-|  | LocalTime withNano(int nanoOfSecond) | 해당 시간 객체에서 나노초(NANO_ OF_SECOND) 필드를 전달된 새로운 값으로 설정한 새로운 시간 객체를 반환 |
+|  | LocalTime withHour(int hour) | 해당 시간 객체에서 시(`HOUR_OF_DAY`) 필드를 전달된 새로운 값으로 설정한 새로운 시간 객체를 반환 |
+|  | LocalTime withMinute(int minute) | 헤당 시간 객체에서 분(`MINUTE_OF_HOUR`) 필드를 전달된 새로운 값으로 설정한 새로운 시간 객체를 반환 |
+|  | LocalTime withSecond(int second) | 해당 시간 객체에서 초(`SECOND_OF_MINUTE`) 필드를 전달된 새로운 값으로 설정한 새로운 시간 객체를 반환 |
+|  | LocalTime withNano(int nanoOfSecond) | 해당 시간 객체에서 나노초(`NANO_OF_SECOND`) 필드를 전달된 새로운 값으로 설정한 새로운 시간 객체를 반환 |
 
 #### plus()
 
@@ -223,7 +223,7 @@ boolean isBefore(ChronoLocalDate other)
 boolean isEqual(ChronoLocalDate other) // LocalDate에만 있음
 ```
 
-1. `isEqual()`을 제공된 이유는 연표가 다른 두 날짜를 비교하기 위해서이다. LocalDate 클래스에만 제공한다. `equals()`은 모든 필드가 일치해야하지만, `isEqual()`은 날짜만 비교한다.
+`isEqual()`을 제공된 이유는 연표가 다른 두 날짜를 비교하기 위해서이다. LocalDate 클래스에만 제공한다. `equals()`은 모든 필드가 일치해야하지만, `isEqual()`은 날짜만 비교한다.
 
 ```java
 LocalDate kDate = LocalDate.of(1999, 12, 31);
@@ -233,8 +233,8 @@ System.out.println(kDate.equals(jDate)); // false, YEAR_OF_ERA가 다름
 System.out.println(kDate.isEqual(jDate)); // true
 ```
 
-1. **isBefore()메서드** : 두 개의 날짜와 시간 객체를 비교하여 현재 객체가 명시된 객체보다 앞선 시간인지를 비교한다.
-2. **isAfter()메서드** : 두 개의 날짜와 시간 객체를 비교하여 현재 객체가 명시된 객체보다 늦은 시간인지를 비교한다.
+- **isBefore()메서드** : 두 개의 날짜와 시간 객체를 비교하여 현재 객체가 명시된 객체보다 앞선 시간인지를 비교한다.
+- **isAfter()메서드** : 두 개의 날짜와 시간 객체를 비교하여 현재 객체가 명시된 객체보다 늦은 시간인지를 비교한다.
 
 ## 참조
 

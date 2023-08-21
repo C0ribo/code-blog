@@ -49,8 +49,8 @@ Calendar cal = Calendar.getInstance();
 // Calendar 인스턴스 생성 후 setTime 메서드로 세팅
 cal.setTime(d);
 ```
-- getInstance()을 통해 얻은 인스턴스는 기본적으로 현재 시스템의 날짜와 시간에 대해 정보를 담고 있다.
-- int get(int field) : 원하는 필드의 값을 얻어오는 방법을 보여주기 위한 것이다.
+- **getInstance()**을 통해 얻은 인스턴스는 기본적으로 현재 시스템의 날짜와 시간에 대해 정보를 담고 있다.
+- **int get(int field)** : 원하는 필드의 값을 얻어오는 방법을 보여주기 위한 것이다.
 
 ```java
 public final static int YEAR = 1;
@@ -73,6 +73,7 @@ get 메서드의 매개변수로 사용되는 int값들은 Calendar에 정의된
 |`DAY_OF_WEEK_IN_MONTH` | 그 달의 몇 번째 요일 |
 
 **시간 필드**
+
 | 필드명 | 설명 |
 |--- | --- |
 |`HOUR` | 시간(0~11) | 
@@ -102,27 +103,31 @@ void set(int year, int month, int date, int hourOfDay, int minute, int second) /
 
 ### add() 메서드
 
+```java
 add(int field, int amount)
+```
 
 - 지정 필드의 값을 원하는 만큼 증가 또는 감소
 - 특정 날짜 또는 시간을 기점으로 일정기간 전후의 날짜와 시간을 알 수 있음
 - 다른 필드에 영향을 줌
 - 음수 사용 가능
 
-```
-날짜필드(Calendar.Date)값 31 증가 시 다음 달로 넘어가므로 월 필드(Calendar.Month)도 1증가
-```
+
+> 날짜필드(Calendar.Date)값 31 증가 시 다음 달로 넘어가므로 월 필드(Calendar.Month)도 1증가
+
 
 ### roll() 메서드
 
+```java
 roll(int field, int amount)
+```
 
 - 지정 필드의 값을 증가 또는 감소시키는 메서드
 - 다른 필드에 영향을 주지 않음
 
-```
-월 필드의 값은 변하지 않고 일 필드의 값만 바뀜 
-```
+
+> 월 필드의 값은 변하지 않고 일 필드의 값만 바뀜 
+
 
 > 일 필드가 말 일(end of month)일 때, roll 메서드를 이용해서 월 필드를 변경하면 일 필드에 영향을 미칠 수 있다.<br> 3월 31일에서 Month -1 하면 2월 28일
 
