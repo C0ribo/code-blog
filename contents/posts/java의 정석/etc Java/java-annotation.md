@@ -1,6 +1,6 @@
 ---
 title: "[Java] 어노테이션(annotation)"
-description: "annotation"
+description: "annotation, @Override, @Deprecatedd, @FunctionalInterface, @SuppressWarnings, @SafeVarargs"
 date: 2023-08-31
 update: 2023-08-31
 tags:
@@ -127,3 +127,6 @@ public static <T> List<T> asList(T... a) {
 
 `@SafeVarargs`로 `unchecked`경고는 억제할 수 있지만, `varargs`경고는 억제할 수 없기 때문에 `@SafeVarargs`와 `@SuppressWarnings("varargs")`를 같이 붙인다.
 
+## 참고
+
+- 자바의 정석
