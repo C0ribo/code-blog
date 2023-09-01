@@ -111,6 +111,22 @@ public @interface FunctionalInterface { }
 ```
 
 
+### @Inherited
+
+상위 클래스에서 사용한 어노테이션을 하위 클래스에 자동으로 상속되도록 지정하는 역할이다. `@Inherited`을 가진 어노테이션은 인터페이스에는 적용되지 않는다. 인터페이스에서 어노테이션을 선언하더라도 하위 클래스에 상속되지 않는다.
+
+```java
+@Inherited                      // @SupperAnno가 자식까지 영향 미치게
+@interface SupperAnno { }
+
+@SuperAnno
+class Parent { }
+
+class Child extends Parent { }  // Child에 어노테이션이 붙은 것으로 인식
+```
+
+Child클래스는 어노테이션이 붙지 않았지만, 부모인 Parent클래스에 붙은 `@SuperAnno`가 상속되어 Child클래스에도 `@SuperAnno`가 붙은 것처럼 인식한다.
+
 ## 참고
 
 - 자바의 정석
