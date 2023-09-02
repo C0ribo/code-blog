@@ -127,6 +127,11 @@ class Child extends Parent { }  // Child에 어노테이션이 붙은 것으로 
 
 Child클래스는 어노테이션이 붙지 않았지만, 부모인 Parent클래스에 붙은 `@SuperAnno`가 상속되어 Child클래스에도 `@SuperAnno`가 붙은 것처럼 인식한다.
 
+### @Repeatable
+
+
+### @Native
+
 ## 참고
 
 - 자바의 정석
