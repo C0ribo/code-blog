@@ -129,8 +129,60 @@ Child클래스는 어노테이션이 붙지 않았지만, 부모인 Parent클래
 
 ### @Repeatable
 
+@Repeatable이 붙은 어노테이션은 여러 번 붙이고 쓸 수 있다.
+
+```java
+@Repeatable(ToDos.class) // ToDo 어노테이션을 여러 번 반복해서 쓸 수 있다
+@interface ToDo {
+  String value();
+}
+```
+
+위의 예제처럼 ToDo.class를 앞에 @Repeatable을 붙이므로써 똑같은 걸 반복적으로 사용할 수 있다.
+
+```java
+@ToDo("delete test codes")
+@ToDo("override inherited methods")
+class MyClass {
+  ...
+}
+```
+
+같은 이름의 어노테이션을 여러 개가 하나의 대상에 적용할 수 있기 떄문에, 하나로 묶어서 다룰 수 있는 어노테이션도 추가로 정의해야 한다.
+
+```java
+@interface ToDos {        // 여러 개의 ToDo어노테이션을 담을 컨테이너 어노테이션 ToDos
+  ToDo[] value();         // ToDo어노테이션 배달타입의 요소 선언. 이름이 value여야 한다
+}
+@Repeatable(ToDos.class) // 괄호 안에 컨테이너 어노테이션을 지정해야한다
+@interface ToDo {
+  String value();
+}
+```
 
 ### @Native
+
+네이티브 메서드(native method)에 의해 참조되는 상수 필드(constant field)에 붙이는 어노테이션이다. 네이티브 메서드는 JVM에 설치된 OS의 메서드를 말한다. 
+
+```java
+public class Object {
+  private static native void registerNatives(); // 네이티브 메서드
+
+  static {
+    registerNatives(); // 네이티브 메서드
+  }
+
+  protected native Object clone() throws CloneNotSupportedException;
+  public final native Class<?> getClass();
+  public final native void notify();
+  public final native void notifyAll();
+  public final native void wait(long timeout) throws InterruptedException;
+  public native int hashCode();
+    ...
+}
+```
+
+모든 클래스의 조상인 Object클래스의 메서드들은 대부분 네이티브 메서드이다.
 
 ## 참고
 
