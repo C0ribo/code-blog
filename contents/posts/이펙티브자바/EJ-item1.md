@@ -15,7 +15,44 @@ series: "이펙티브 자바"
 
 #### 첫 번째, 이름을 가질 수 있다.
 
-정적 팩터리는 이름만 잘 지으면 반환될 객체의 특성을 쉽게 묘사할 수 있다.
+정적 팩터리는 이름만 잘 지으면 반환될 객체의 특성을 쉽게 묘사할 수 있다. 정적 메서드를 통해 적절한 메서드 네이밍을 해준다면 반환될 객체의 특성을 한번에 유추할 수 있게 된다. 
+
+```java
+class Car {
+    private String brand;
+    private String color;
+
+    // private 생성자
+    private Car(String brand, String color) {
+        this.brand = brand;
+        this.color = color;
+    }
+
+    // 정적 팩토리 메서드 (매개변수 하나는 from 네이밍)
+    public static Car brandBlackFrom(String brand) {
+        return new Car(brand, "black");
+    }
+
+    // 정적 팩토리 메서드 (매개변수 여러개는 of 네이밍)
+    public static Car brandColorOf(String brand, String color) {
+        return new Car(brand, color);
+    }
+}
+```
+
+```java
+public static void main(String[] args) {
+    // 검정색 테슬라 자동차 
+    Car teslaCar = Car.brandBlackFrom("Tesla");
+
+    // 빨간색 BMW 자동차
+    Car bmwRedCar = Car.brandColorOf("BMW", "Red");
+}
+```
+
+생성자 대신 정적 팩토리 메서드를 호출함으로써 생성될 객체의 특성에 대해 쉽게 묘사할 수 있어서 코드의 가독성을 높여준다.
+
+> 정적 팩토리 메서드를 구성하고자 하면, 반드시 생성자에 private 접근 제어자를 두어 외부에서 new 키워드를 이용하여 객체를 생성한다.
 
 #### 두 번째, 호출될 때마다 인스턴스를 새로 생성하지는 않아도 된다.
 
