@@ -231,3 +231,9 @@ FileStore fs = Files.getFileStore(path);
 ```java
 BufferedReader br = Files.newBufferedReader(path);
 ```
+
+
+## Ref
+
+- 이펙티브 자바
+- [같이 보고 공부한 블로그](https://inpa.tistory.com/entry/GOF-%F0%9F%92%A0-%ED%8C%A9%ED%86%A0%EB%A6%AC-%EB%A9%94%EC%84%9C%EB%93%9CFactory-Method-%ED%8C%A8%ED%84%B4-%EC%A0%9C%EB%8C%80%EB%A1%9C-%EB%B0%B0%EC%9B%8C%EB%B3%B4%EC%9E%90)
